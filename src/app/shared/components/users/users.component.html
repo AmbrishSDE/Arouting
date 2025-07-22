@@ -1,0 +1,36 @@
+<p>users works!</p>
+
+<div class="row">
+    <div class="col-12 text-right">
+           <button 
+           routerLink="/users/addUser"
+           class="btn btn-primary">Add USer</button>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="list-group">
+            <li
+            [routerLink]="users.userId"
+            *ngFor="let users of usesArr"
+            class="list-group-item">
+                  {{users.username}}
+            </li>
+        </div>
+    </div>
+</div>
+
+<!-- 
+when ever active url comes in browser then the router-outlet reads path from top to bottm. 
+but in our case if we we have kept user/:user id avbove user/adduser so it will take first users/:userid ass any thing :(param) is dynmaic i.e its vale can be string or number so it took iser:/userid than user/useradd so put user/useradd first  
+also to get the para we nedd instance of active route so we use ActivedRoute typeAliace 
+
+
+the route in browser is called as active route
+routerLink="adduser" //relative path
+[routerLink]="{{users.userId}}"
+[routerLink]="users.userId" //relative routing
+[routerLink]="['/users', users.userId]" // absolute routing 
+-->
