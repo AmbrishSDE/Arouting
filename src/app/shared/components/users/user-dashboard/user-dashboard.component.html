@@ -1,2 +1,27 @@
 
-{{userInfo | json}}
+<!-- {{userInfo | json}} -->
+ <app-back-btn></app-back-btn>
+<div class="card" *ngIf="userId && userInfo; else nouserdetail">
+    <div class="card-body">
+
+        <h4>{{userInfo.username}}</h4>
+        <p>Theuser role is {{userInfo.userRole}}</p>
+        <div>
+            <button 
+         
+              routerLink="edit"
+             class="btn btn-info mr-3">EDIT</button>
+             <button 
+                (click)="onRemove()"
+             class="btn btn-danger">REMOVE</button>
+        </div>
+    </div>
+</div>
+
+ <!-- [routerLink]="['/users',userId,'edit']" -->
+<ng-template
+#nouserdetail>
+<p class="alert alert-info">
+    No User Info!!!!
+</p>
+</ng-template>

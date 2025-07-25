@@ -14,6 +14,8 @@ import { UserComponent } from './shared/components/components/user/user.componen
 import { ProductsDashboardComponent } from './shared/components/products-dashboard/products-dashboard.component';
 import { UserFormComponent } from './shared/components/users/user-form/user-form.component';
 import { UserDashboardComponent } from './shared/components/users/user-dashboard/user-dashboard.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BackBtnComponent } from './shared/components/back-btn/back-btn.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,15 @@ import { UserDashboardComponent } from './shared/components/users/user-dashboard
     UserComponent,
     ProductsDashboardComponent,
     UserFormComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    BackBtnComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    RouterOutlet
+    RouterOutlet,
+    ReactiveFormsModule
 ],
   providers: [],
   bootstrap: [AppComponent]

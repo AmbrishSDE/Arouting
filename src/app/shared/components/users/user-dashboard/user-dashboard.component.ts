@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Iuser } from 'src/app/shared/models/users.interface';
 import { UsersService } from 'src/app/shared/services/users.service';
 
@@ -9,11 +9,13 @@ import { UsersService } from 'src/app/shared/services/users.service';
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit {
+
 userId !: string
 userInfo !: Iuser
 constructor(
   private _routes : ActivatedRoute,
-  private _users : UsersService
+  private _users : UsersService,
+  private _rote : Router
 ) { }
 
 ngOnInit(): void 
@@ -34,6 +36,10 @@ this._users.fetchUserDetails(this.userId) // it returs observable of type Iusers
 }
 }
 
+onRemove() {
+this._users.removeuser(this.userInfo)
+this._rote.navigate(['users'])
+}
 }
 
 // also to get the para we need instance of active route so we use ActivedRoute typeAliace  

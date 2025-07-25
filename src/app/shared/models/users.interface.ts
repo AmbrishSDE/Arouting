@@ -3,6 +3,6 @@
 export interface  Iuser {
     username : string;
     userId : string,
-    userRole : 'candidate' | 'Admin';
+    userRole : 'candidate' | 'Admin' | 'SA';
 
 }

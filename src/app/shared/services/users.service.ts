@@ -40,4 +40,18 @@ fetchUserDetails(id: string) : Observable<Iuser>{
   return of(userobj)
 }
 
+addUser(userobj : Iuser){
+this.usersArr.push(userobj)
+}
+
+UpdatedUser(updatedobj : Iuser){
+let getIndex = this.usersArr.findIndex(user => user.userId === updatedobj.userId);
+this.usersArr[getIndex] = updatedobj;
+}
+
+removeuser(userobj: Iuser){
+let getIndex = this.usersArr.findIndex(ind => ind.userId === userobj.userId)
+this.usersArr.splice(getIndex,1)
+}
+
 }
