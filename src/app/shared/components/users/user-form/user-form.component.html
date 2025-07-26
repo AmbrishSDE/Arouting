@@ -2,7 +2,6 @@
 
 <h4>
 {{isInEdit ? 'Update' : 'Add User'}}
-
 </h4>
 
 <form [formGroup]="userForm" (ngSubmit)="onUserAdd()">
@@ -28,6 +27,7 @@ id="username">
 *ngIf="isInEdit"
 (click)="onUpdate()"
 class="btn btn-primary" type="button">Update User</button>
+
 <button 
 [disabled]="userForm.invalid"
 *ngIf="!isInEdit"

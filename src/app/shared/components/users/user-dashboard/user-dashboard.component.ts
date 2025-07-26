@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Iuser } from 'src/app/shared/models/users.interface';
 import { UsersService } from 'src/app/shared/services/users.service';
+import { GetconfirmedComponent } from '../../getconfirmed/getconfirmed.component';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,10 +15,13 @@ export class UserDashboardComponent implements OnInit {
 
 userId !: string
 userInfo !: Iuser
+ 
 constructor(
   private _routes : ActivatedRoute,
   private _users : UsersService,
-  private _rote : Router
+  private _rote : Router ,
+  private _snackbar: MatSnackBar,
+  private _matdig :MatDialog
 ) { }
 
 ngOnInit(): void 
@@ -37,7 +43,24 @@ this._users.fetchUserDetails(this.userId) // it returs observable of type Iusers
 }
 
 onRemove() {
-this._users.removeuser(this.userInfo)
+  let dialogconfig = new MatDialogConfig()
+  dialogconfig.disableClose = true //
+  dialogconfig.data = `Are sure you want to remove ${this.userInfo.username} `
+  let digg = this._matdig.open(GetconfirmedComponent, dialogconfig) 
+  digg.afterClosed().subscribe((data) =>{
+    if(data){
+      this._users.removeuser(this.userInfo)
+    }
+  })
+
+  
+  let snackconfig : MatSnackBarConfig = {
+       duration : 3000,
+       horizontalPosition : 'left',
+       verticalPosition : 'top'
+  }
+  this._snackbar.open(`User ${this.userInfo.username} is Removed succesfully !!!!`,'close', snackconfig)
+
 this._rote.navigate(['users'])
 }
 }
