@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-12 text-right">
            <button 
-           routerLink="/users/addUser"
-           class="btn btn-primary">Add USer</button>
+           routerLink="/products/addproducts"
+           class="btn btn-primary">Add Products</button>
     </div>
 </div>
 
@@ -11,20 +11,14 @@
     <div class="col-md-4">
         <div class="list-group">
             <li
-            [routerLink]="users.userId"
-            [queryParams]="{userRole : users.userRole}"
-            *ngFor="let users of usesArr"
+            (click)="onProductnavigate(prod)"
+            *ngFor="let prod of ProductArr"
             class="list-group-item">
-                  {{users.username}}
+                  {{prod.pname}}
             </li>
         </div>
     </div>
-
     <div class="col-md-8">
         <router-outlet></router-outlet>
     </div>
 </div>
-
-
-
-

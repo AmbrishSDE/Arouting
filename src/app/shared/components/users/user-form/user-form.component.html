@@ -29,9 +29,6 @@ id="username">
 class="btn btn-primary" type="button">Update User</button>
 
 <button 
-[disabled]="userForm.invalid"
 *ngIf="!isInEdit"
 class="btn btn-primary" type="submit">Add User</button>
 </form>
-
-<!-- {{userForm.value | json }} -->

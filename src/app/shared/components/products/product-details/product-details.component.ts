@@ -1,24 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Iuser } from 'src/app/shared/models/users.interface';
-import { UsersService } from 'src/app/shared/services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Ismart } from 'src/app/shared/models/products.interface';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { GetconfirmedComponent } from '../../getconfirmed/getconfirmed.component';
 
-@Component({
-  selector: 'app-user-dashboard',
-  templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.scss']
-})
-export class UserDashboardComponent implements OnInit {
 
-userId !: string
-userInfo !: Iuser
+@Component({
+  selector: 'app-product-details',
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.scss']
+})
+export class ProductDetailsComponent implements OnInit {
+
+Pid !: string
+Pinfo !: Ismart
  
 constructor(
   private _routes : ActivatedRoute,
-  private _users : UsersService,
+  private _prod : ProductService,
   private _rote : Router ,
   private _snackbar: MatSnackBar,
   private _matdig :MatDialog
@@ -26,14 +27,15 @@ constructor(
 
 ngOnInit(): void 
 {
-console.log(this._routes)
+
+
 this._routes.params.subscribe(param =>{
 console.log(param)
-this.userId = param['userId']
-if(this.userId){
-  this._users.fetchUserDetails(this.userId).subscribe({
+this.Pid = param['pid']
+if(this.Pid){
+  this._prod.fetchusersdetails(this.Pid).subscribe({
     next : (data) => {
-      this.userInfo = data
+      this.Pinfo = data
     },
     error : (err) =>{
     console.log(err)
@@ -41,16 +43,17 @@ if(this.userId){
   })
 }
 })
-  }
+
+}
 
 onRemove() {
   let dialogconfig = new MatDialogConfig()
   dialogconfig.disableClose = true //
-  dialogconfig.data = `Are sure you want to remove ${this.userInfo.username} `
+  dialogconfig.data = `Are sure you want to remove ${this.Pinfo.pname} `
   let digg = this._matdig.open(GetconfirmedComponent, dialogconfig) 
   digg.afterClosed().subscribe((data) =>{
     if(data){
-      this._users.removeuser(this.userInfo)
+      this._prod.removeobj(this.Pinfo)
     }
   })
 
@@ -60,8 +63,17 @@ onRemove() {
        horizontalPosition : 'left',
        verticalPosition : 'top'
   }
-  this._snackbar.open(`User ${this.userInfo.username} is Removed succesfully !!!!`,'close', snackconfig)
+  this._snackbar.open(`User ${this.Pinfo.pname} is Removed succesfully !!!!`,'close', snackconfig)
 
-this._rote.navigate(['users'])
+this._rote.navigate(['products'])
+}
+
+
+onEditnavigate() {
+
+this._rote.navigate(['edit'],{
+relativeTo : this._routes,
+queryParamsHandling : 'preserve'
+})
 }
 }

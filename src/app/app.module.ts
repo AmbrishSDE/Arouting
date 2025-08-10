@@ -5,12 +5,9 @@ import { MyComponentComponent } from './shared/components/my-component/my-compon
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HomeComponent } from './shared/components/home/home.component';
 import { UsersComponent } from './shared/components/users/users.component';
-import { ProductsComponent } from './shared/components/products/products.component';
-import { FairsDashboardComponent } from './shared/components/fairs-dashboard/fairs-dashboard.component';
 import { AppRoutingModule } from './app-rounting.module';
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { UserComponent } from './shared/components/components/user/user.component';
-import { ProductsDashboardComponent } from './shared/components/products-dashboard/products-dashboard.component';
 import { UserFormComponent } from './shared/components/users/user-form/user-form.component';
 import { UserDashboardComponent } from './shared/components/users/user-dashboard/user-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +15,15 @@ import { BackBtnComponent } from './shared/components/back-btn/back-btn.componen
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GetconfirmedComponent } from './shared/components/getconfirmed/getconfirmed.component';
+import { ProductDashboardComponent } from './shared/components/products/product-dashboard/product-dashboard.component';
+import { ProductDetailsComponent } from './shared/components/products/product-details/product-details.component';
+import { ProductFormComponent } from './shared/components/products/product-form/product-form.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { FairsDetailsComponent } from './shared/components/fairs-details/fairs-details/fairs-details.component';
+import { FairsDahboardComponent } from './shared/components/fairs-details/fairs-dahboard/fairs-dahboard.component';
+import { FairsFormsComponent } from './shared/components/fairs-details/fairs-forms/fairs-forms.component';
+import { AuthComponent } from './shared/components/auth/auth.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,14 +32,19 @@ import { GetconfirmedComponent } from './shared/components/getconfirmed/getconfi
     NavbarComponent,
     HomeComponent,
     UsersComponent,
-    ProductsComponent,
-    FairsDashboardComponent,
     UserComponent,
-    ProductsDashboardComponent,
     UserFormComponent,
     UserDashboardComponent,
     BackBtnComponent,
     GetconfirmedComponent,
+    ProductDashboardComponent,
+    ProductDetailsComponent,
+    ProductFormComponent,
+    PageNotFoundComponent,
+    FairsDetailsComponent,
+    FairsDahboardComponent,
+    FairsFormsComponent,
+    AuthComponent
   
   ],
   imports: [
@@ -42,8 +53,9 @@ import { GetconfirmedComponent } from './shared/components/getconfirmed/getconfi
     RouterModule,
     RouterOutlet,
     ReactiveFormsModule,
-  MaterialModule,
-  BrowserAnimationsModule
+    MaterialModule,
+    BrowserAnimationsModule,
+    HttpClientModule
 ],  
   providers: [], // servies
   bootstrap: [AppComponent]// 1st render which module

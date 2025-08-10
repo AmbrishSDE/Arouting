@@ -29,14 +29,11 @@ usersArr : Array<Iuser> = [
   constructor() { }
 
 fetchAllUsers() : Observable<Iuser[]>{
-// Api call to fetch all users DATA
 return of(this.usersArr)
   }
 
 fetchUserDetails(id: string) : Observable<Iuser>{
-// API Call to get USER_DETAILS
   let userobj =  this.usersArr.find(user => user.userId === id) as Iuser
-  // console.log(userobj)
   return of(userobj)
 }
 

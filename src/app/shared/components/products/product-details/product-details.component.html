@@ -1,14 +1,13 @@
-
  <app-back-btn></app-back-btn>
-<div class="card" *ngIf="userId && userInfo; else nouserdetail">
+<div class="card" *ngIf="Pid && Pinfo; else nouserdetail">
     <div class="card-body">
 
-        <h4>{{userInfo.username}}</h4>
-        <p>Theuser role is {{userInfo.userRole}}</p>
+        <h4>{{Pinfo.pname}}</h4>
+        <p>Theuser role is {{Pinfo.pstatus}}</p>
         <div>
             <button 
-            [queryParamsHandling]="'preserve'"
-             routerLink="edit"
+            
+            (click)="onEditnavigate()"
              class="btn btn-info mr-3">EDIT</button>
              <button 
             (click)="onRemove()"
@@ -17,9 +16,13 @@
     </div>
 </div>
 
+
 <ng-template
 #nouserdetail>
 <p class="alert alert-info">
-    No User Info!!!!
+    No Product Info!!!!
 </p>
-</ng-template>
+</ng-template> 
+
+
+

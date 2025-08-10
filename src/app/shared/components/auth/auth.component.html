@@ -1,0 +1,64 @@
+<main class="main">
+<ng-container *ngIf="alreadyhasaccount">
+<div class="card">
+    <div class="card-body">
+        <h2>Login Form</h2>
+<form [formGroup]="loginform" (ngSubmit)="onLogin()">
+<div class="formgroup">
+    <label for="email">Email</label>
+    <input type="text" id="email"  formControlName="email" class="form-control">
+</div>
+<div class="formgroup">
+    <label for="password">Password</label>
+    <input type="text"  id="password" formControlName="password" class="form-control">
+</div>
+
+
+
+<button mat-raised-button color="primary">Log In</button>
+</form>
+<a href="javascript:;" (click)="alreadyhasaccount = false">
+    Don't have account
+</a>
+    </div>
+</div>
+
+
+</ng-container>
+ 
+<ng-container *ngIf="!alreadyhasaccount">
+<div class="card">
+    <div class="card-body">
+        <h2>sign Up form</h2>
+        <form [formGroup]="signupform" (ngSubmit)="onsignup()">
+<div class="formgroup">
+    <label for="email">Email</label>
+    <input type="text" id="email"  formControlName="email" class="form-control">
+</div>
+<div class="formgroup">
+    <label for="password">Password</label>
+    <input type="text"  id="password" formControlName="password" class="form-control">
+</div>
+<div class="formgroup">
+    <label for="userole">UserRole</label>
+    <select type="text"  id="userole" formControlName="userRole" class="form-control">
+        <option value="admin">Admin</option>
+        <option value="buyer">Buyer</option>
+        <option value="superAdmin">Super Admin</option>
+    </select>
+</div>
+<button mat-raised-button color="primary">Sign Up</button>
+</form>
+        <a href="javascript:;"
+        (click)="alreadyhasaccount = true"
+        >Already logedin </a>
+    </div>
+</div>
+
+    
+</ng-container> 
+</main>
+
+
+
+

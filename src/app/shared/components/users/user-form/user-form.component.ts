@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { error } from 'console';
 import { Iuser } from 'src/app/shared/models/users.interface';
-import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { UuidService } from 'src/app/shared/services/uuid.service';
 
@@ -14,11 +12,13 @@ import { UuidService } from 'src/app/shared/services/uuid.service';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-//if activeurl has id ? isinedit = true : isinedit = false
 isInEdit : boolean = false;
-userId !: string // undefiend as not initializer
+userId !: string 
 userForm !: FormGroup;
 editUser !: Iuser
+userp !: string
+btnd : boolean = false
+
 constructor(
   private _routes : ActivatedRoute,
   private _uuid : UuidService,
@@ -26,13 +26,16 @@ constructor(
   private _route : Router,
   private _snackbar : MatSnackBar
 ){}
-ngOnInit(): void {+
-// this.userId = this._routes.snapshot.params['userId']
-// if(this.userId){
-//   this.isInEdit = true
-// }
+ngOnInit(): void {
 this.createUserForm()
 this.getusersparams()
+this.userp = this._routes.snapshot.queryParams['userRole']
+console.log(this.userp)
+
+if(this.userp && this.userp == 'candidate'){
+this.userForm.disable()
+this.btnd = true
+}
 }
 
 createUserForm(){
@@ -46,12 +49,10 @@ getusersparams(){
 this.userId = this._routes.snapshot.params['userId']
  if(this.userId){
    this.isInEdit = true
-
-//API call to get user object using userservice
 this._user.fetchUserDetails(this.userId)
 .subscribe({
   next : data => {
-    this.editUser = data // path in form
+    this.editUser = data 
     this.userForm.patchValue(this.editUser)
 },
   error : err => console.log(err)
@@ -76,7 +77,6 @@ if(this.userForm.valid){
        verticalPosition : 'top'
   }
   this._snackbar.open(`User ${obj.username} is added succesfully !!!!`,'close', snackconfig)
-
 this._route.navigate(['users'])
 }
 }
@@ -94,8 +94,6 @@ this._user.UpdatedUser(UPDATED_USER)
        verticalPosition : 'top'
   }
   this._snackbar.open(`User ${UPDATED_USER.username} is updated succesfully !!!!`,'close', snackconfig)
-
-//navigate to dashboard
 this._route.navigate(['users'])
 }
 }
