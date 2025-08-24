@@ -49,8 +49,12 @@ let obj = this.loginform.value
   this._authservice.login(obj).subscribe({
   next : res => {
   console.log(res)
-  this._authservice.savetoken(res.username)
-  this._authservice.saveUserRole(res.userRole)
+  console.log(res.token)
+  console.log(res.userRole)
+   this._authservice.savetoken(res.token)
+
+   this._authservice.saveUserRole(res.userRole)
+  
   this._router.navigate(['home'])
 },
   error : (errr )=>{
@@ -58,9 +62,6 @@ let obj = this.loginform.value
 }
 })
 }
-
-
-  
 }
 
 onsignup() {

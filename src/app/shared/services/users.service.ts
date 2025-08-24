@@ -11,7 +11,7 @@ usersArr : Array<Iuser> = [
   {
     username: 'john_doe',
     userId: 'u001',
-    userRole: 'candidate'
+    userRole: 'buyer'
   },
   {
     username: 'jane_smith',
@@ -21,7 +21,7 @@ usersArr : Array<Iuser> = [
   {
     username: 'bob_brown',
     userId: 'u003',
-    userRole: 'candidate'
+    userRole: 'superAdmin'
   }
 ];
 

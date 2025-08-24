@@ -10,6 +10,9 @@ import { ProductFormComponent } from './shared/components/products/product-form/
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { AuthGuard } from './shared/services/Authguard';
 import { AuthComponent } from './shared/components/auth/auth.component';
+import { userRoleGuard } from './shared/services/userole.guard';
+import { CandeactivateGuard } from './shared/services/candeactivate.guard';
+import { ResolverResolver } from './shared/services/resolver.resolver';
 
 
 const routes: Routes = [
@@ -20,37 +23,50 @@ const routes: Routes = [
   {
     path: 'home', 
     component: HomeComponent,
-    title : 'dashboard'
+    title : 'dashboard',
+     // canActivate : [AuthGuard]
   },
   {
     path: 'users',
     component: UsersComponent,
+    resolve : {
+    users :  ResolverResolver
+     } ,
+    canActivate : [AuthGuard, userRoleGuard],
     title : 'users',
-    children : [
-      {
-    path: 'addUser',
+    data : {
+    userRoles : [ 'admin', 'superAdmin']
+     },
+  },
+ {
+    path: 'users/addUser',
     component: UserFormComponent,
-    title : 'adduser'
+    title : 'adduser',
+      //canActivate : [AuthGuard]
   },
   {
-    path: ':userId',
+    path: 'users/:userId',
     component: UserDashboardComponent,
-    title : 'usersid'
+    resolve : {
+      userobj :  ResolverResolver
+    },
+    title : 'users/usersid',
+      //canActivate : [AuthGuard]
   },
   {
-    path: ':userId/edit',
+    path: 'users/:userId/edit',
     component: UserFormComponent,
-    title : 'edit'
+    title : 'edit',
+      //canActivate : [AuthGuard],
+      canDeactivate : [CandeactivateGuard]
   }
-    ]
-  }
-
   ,
   {
     path: 'products', 
     component: ProductDashboardComponent,
     title : 'Products',
     canActivate : [AuthGuard],
+    
     children : [
   {
     path : 'addproducts',
@@ -72,12 +88,15 @@ const routes: Routes = [
   {
     path : 'page-not-found',
     component : PageNotFoundComponent,
-    title : 'Pagenotfound'
+    title : 'Pagenotfound',
+    data: {
+      msg : 'page not found msg using static data...!'
+    }
   }
 ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Iuser } from '../../models/users.interface';
 import { UsersService } from '../../services/users.service';
-import { RouterOutlet } from "@angular/router";
+import { ActivatedRoute, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -11,12 +11,14 @@ import { RouterOutlet } from "@angular/router";
 export class UsersComponent implements OnInit {
   usesArr : Array<Iuser> = []
   constructor(
-
+  private _router : ActivatedRoute,
   private userservice : UsersService
-  ) { }
+  ) { 
+this.usesArr = this._router.snapshot.data['users']
+}
 
   ngOnInit(): void {
-    this.getAllUsers()
+   // this.getAllUsers()
   }
 
   getAllUsers(){
@@ -30,5 +32,4 @@ export class UsersComponent implements OnInit {
       }
     })
   }
-
 }

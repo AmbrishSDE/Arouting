@@ -24,6 +24,7 @@ import { FairsDahboardComponent } from './shared/components/fairs-details/fairs-
 import { FairsFormsComponent } from './shared/components/fairs-details/fairs-forms/fairs-forms.component';
 import { AuthComponent } from './shared/components/auth/auth.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AuthGuard } from './shared/services/Authguard';
 
 @NgModule({
   declarations: [
@@ -44,8 +45,7 @@ import {HttpClientModule} from '@angular/common/http';
     FairsDetailsComponent,
     FairsDahboardComponent,
     FairsFormsComponent,
-    AuthComponent
-  
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,9 +55,10 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+     
 ],  
-  providers: [], // servies
+  providers: [ AuthGuard], // servies
   bootstrap: [AppComponent]// 1st render which module
 })
 export class AppModule { }

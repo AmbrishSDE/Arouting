@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-page-not-found',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent implements OnInit {
+getMsg !: string;
+  constructor(
+    private _routes : ActivatedRoute
+  ) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {  
+  console.log(this._routes.snapshot)
+  this.getMsg = this._routes.snapshot.data['msg']
   }
 
 }

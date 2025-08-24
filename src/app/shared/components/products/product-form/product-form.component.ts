@@ -79,7 +79,7 @@ if(this.pID){
         ...this.addForm.value,
         pid: this._uuid.generateUuid()
       };
-
+console.log(obj)
       this._prod.createnew(obj);
 
       this.showSnack(`User ${obj.pname} is added successfully !!!!`);

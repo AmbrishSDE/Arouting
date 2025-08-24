@@ -1,10 +1,8 @@
 
 <app-back-btn></app-back-btn>
+<!-- <h4>{{ isInEdit ? 'Update Product' : 'Add Product' }}</h4> -->
 
-<h4>{{ isInEdit ? 'Update Product' : 'Add Product' }}</h4>
-
-
-<form [hidden]="isInEdit" [formGroup]="addForm" (ngSubmit)="onAdd()">
+<form [hidden]="!isInEdit" [formGroup]="addForm" (ngSubmit)="onAdd()">
   <div class="form-group">
     <label for="pname">Product Name</label>
     <input
@@ -23,23 +21,19 @@
       id="pstatus"
       class="form-control"
       formControlName="pstatus"
-      placeholder="Enter product status">
-    
+      placeholder="Enter product status">    
     <option value="Out of Stock">Out of Stock</option>
     <option value="Available">Available</option>
     <option value="Discontinued">Discontinued</option>
-
 </select>
-    
   </div>
-
   <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">
     Add Product
   </button>
 </form>
 
 
-<form [hidden]="!isInEdit" [formGroup]="editForm" (ngSubmit)="onUpdate()">
+<form [hidden]="isInEdit" [formGroup]="editForm" (ngSubmit)="onUpdate()">
   <div class="form-group">
     <label for="pnameEdit">Product Name</label>
     <input
@@ -64,15 +58,11 @@
     <option value="Available">Available</option>
     <option value="Discontinued">Discontinued</option>
     </select>
-
-
   </div>
-
   <button
     type="submit"
     class="btn btn-success"
-    [disabled]="editForm.invalid || updatebtnflag"
-  >
+    [disabled]="editForm.invalid || updatebtnflag">
     Update Product
   </button>
 </form>

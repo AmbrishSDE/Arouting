@@ -1,10 +1,9 @@
 
- <app-back-btn></app-back-btn>
-<div class="card" *ngIf="userId && userInfo; else nouserdetail">
+<app-back-btn></app-back-btn>
+<div class="card" *ngIf="userInfo; else nouserdetail">
     <div class="card-body">
-
         <h4>{{userInfo.username}}</h4>
-        <p>Theuser role is {{userInfo.userRole}}</p>
+        <p>The user role is {{userInfo.userRole}}</p>
         <div>
             <button 
             [queryParamsHandling]="'preserve'"
@@ -16,7 +15,6 @@
         </div>
     </div>
 </div>
-
 <ng-template
 #nouserdetail>
 <p class="alert alert-info">

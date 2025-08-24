@@ -36,6 +36,5 @@ onProductnavigate(smart : Ismart){
 this._router.navigate(['products',smart.pid],{
   queryParams : {canEdit : smart.canReturn}
 })
-
 }
 }

@@ -37,16 +37,19 @@ localStorage.setItem('token', token)
 }
 
 saveUserRole(userRole : string){
-localStorage.setItem('token', userRole)
+localStorage.setItem('UserRole', userRole)
 }
 
 gettoken() : boolean {
 // return  !!localStorage.getItem('token')
-// or
 if(localStorage.getItem('token')){
   return true
 } else {
   return false
 }
+}
+
+getuserrole(){
+return  localStorage.getItem('UserRole')
 }
 }
